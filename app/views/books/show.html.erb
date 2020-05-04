@@ -1,0 +1,73 @@
+
+<div class="row">
+	<div class="col-xs-3">
+
+		<h2>User info</h2>
+		<%= render 'users/profile', user: current_user %>
+
+		<h2>New book</h2>
+		<%= render 'books/newform', book: Book.new %>
+
+	</div>
+
+	<div class="col-xs-9">
+		<h2>Book detail</h2>
+
+		<table class="table">
+				<tr>
+					<td>
+						<%= link_to @book.user do %>
+						<%= attachment_image_tag @book.user, :profile_image, size:'40x40', fallback: "no-image-mini.jpg" %><br>
+						<%= @book.user.name %>
+						<% end %>
+					</td>
+					<td><%= link_to @book.title, @book %></td>
+					<td><%= @book.body %></td>
+					<td>
+						
+					</td>
+					<td>
+						<p>コメント数:<%= @book.book_comments.count %></p>
+					</td>
+					<% if @book.user == current_user %>
+						<td><%= link_to "Edit",edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
+						<td><%= link_to "Destroy",@book, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
+					<% end %>
+				</tr>
+		</table>
+		<table class="table table-hover">
+			<tbody>
+				<% @book_comments.each do |book_comment| %>
+				<tr>
+				<td>
+					<%= @book_comments.user.name %>
+					<%= attachment_image_tag(@book_comments.user, :profile_image, size:"40x40", fallback: "no-image-mini.jpg") %>
+				</td>
+					<td><%= @book_comments.comment %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+			<% if @book_comment.errors.any? %>
+			<div class="alert-warning">
+				<%= pluralize(book_comment.errors.count, 'error') %>
+					<ul>
+						<% @book_comment.errors.full_messages.each do |message|  %>
+						<li><%= message %></li>
+						<% end %>
+					</ul>
+			</div>
+			<% end %>
+			<%= form_for @book_comment,url: book_book_comments_path(@book.id) do |f| %>
+				<div class="field">
+					<div class="col-xs-9">
+						<p>comment:</p>
+						<%= f.text_area :comment,class: 'form-control', placeholder: "コメントをここに" %>
+						<%= f.submit "送信する" %>
+					</div>
+				</div>
+			<% end %>
+
+	</div>
+</div>
+
