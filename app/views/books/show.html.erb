@@ -40,10 +40,10 @@
 				<% @book_comments.each do |book_comment| %>
 				<tr>
 				<td>
-					<%= @book_comments.user.name %>
-					<%= attachment_image_tag(@book_comments.user, :profile_image, size:"40x40", fallback: "no-image-mini.jpg") %>
+					<%= attachment_image_tag(book_comment.user, :profile_image, size:"40x40", fallback: "no-image-mini.jpg") %><br>
+					<%= book_comment.user.name %>
 				</td>
-					<td><%= @book_comments.comment %></td>
+					<td><%= book_comment.comment %></td>
 				</tr>
 				<% end %>
 			</tbody>
