@@ -54,8 +54,8 @@
 					<%= book_comment.user.name %>
 					</td>
 					<td><%= book_comment.comment %></td>
-					<% if book_comment.user == current_user %>
 					<td>
+					<% if book_comment.user == current_user %>
 						<%= link_to "Destroy",book_book_comment_path(@book.id,book_comment.id),method: :delete,data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{book_comment.id}" %>
 					</td>
 					<% end %>
@@ -64,14 +64,14 @@
 			</tbody>
 		</table>
 			<% if @book_comment.errors.any? %>
-			<div class="alert-warning">
-				<%= pluralize(book_comment.errors.count, 'error') %>
-					<ul>
-						<% @book_comment.errors.full_messages.each do |message|  %>
-						<li><%= message %></li>
-						<% end %>
-					</ul>
-			</div>
+  				<div class="alert alert-warning">
+  					<%= pluralize(@book_comment.errors.count, 'error') %>
+    				<ul>
+      					<% @book_comment.errors.full_messages.each do |message| %>
+        				<li><%= message %></li>
+        			<% end %>
+           			 </ul>
+    			</div>
 			<% end %>
 			<%= form_for @book_comment,url: book_book_comments_path(@book.id) do |f| %>
 				<div class="field">
