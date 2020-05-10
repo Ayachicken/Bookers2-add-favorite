@@ -40,6 +40,10 @@
     <!--ヘッダーの記述-->
     <div class="container" style="padding-top:30px;">
 
+      <% if user_signed_in? %>
+      <%= render '/layouts/search' %>
+      <% end %>
+      
       <p id="notice" style="color:green;"><%= notice %></p> <!--デバイスでnotice設定されているので呼び出してるだけ-->
       <%= yield %>
 

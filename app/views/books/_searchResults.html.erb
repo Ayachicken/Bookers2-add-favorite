@@ -1,7 +1,17 @@
-<h2>Books</h2>
-    <table>
-    <% books.each do |book| %>
-        <thead>
+<div class='row'>
+  <div class='col-xs-12'>
+    <table class="table table-hover table-inverse">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Title</th>
+					<th>Opinion</th>
+					<th colspan="1"></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% books.each do |book| %>
 				<tr>
 					<td>
 						<%= link_to(book.user) do %>
@@ -12,19 +22,21 @@
 					<td><%= book.body %></td>
 					<td>
 						<% if book.favorited_by?(current_user) %>
-    						<%= link_to book_favorites_path(book), method: :delete do %>
-    						<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
-    						<%= book.favorites.count %>
-    						<% end %>
+    							<%= link_to book_favorites_path(book), method: :delete do %>
+    							<span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+    							<%= book.favorites.count %>
+    							<% end %>
 						<% else %>
-    						<%= link_to book_favorites_path(book), method: :post do %>
-    						<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-    						<%= book.favorites.count %>
-    						<% end %>
+    							<%= link_to book_favorites_path(book), method: :post do %>
+    							<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+    							<%= book.favorites.count %>
+    							<% end %>
 						<% end %>
 					</td>
 					<td><p>コメント数:<%= book.book_comments.count %></p></td>
 				</tr>
-			<% end %>
-        </thead>
-    </table>
+				<% end %>
+			</tbody>
+	</table>
+  </div>
+</div>

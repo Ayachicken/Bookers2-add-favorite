@@ -1,9 +1,8 @@
-<%= render '/layouts/search' %>
-
-<% if @model == 'user' %>
+<% if @user_or_book == '1' %>
 	<h3>Users search for "<%= @content %>"</h3>
-    <%= render 'users/searchResults', users: @records %>
-<% elsif @model == 'book' %>
+    <%= render 'users/searchResults', users: @users %>
+<% elsif @user_or_book == '2' %>
 	<h3>Books search for "<%= @content %>"</h3>
-    <%= render 'books/searchResults', books: @records %>
-<% end %> 
+    <%= render 'books/searchResults', books: @books %>
+<% else %>
+<% end %>
